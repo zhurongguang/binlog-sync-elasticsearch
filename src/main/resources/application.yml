@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: binlog-sync-elasticsearch
+  kafka:
+    bootstrap-servers: 127.0.0.1:9092
+    producer:
+      retries: 3
+      batch-size: 16384
+      buffer-memory: 100MB
+      acks: 1
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+
+binlog:
+  client-type: DEFAULT
+  destination: example
+  username: ${MYSQL_USERNAME:root}
+  password: ${MYSQL_PASSWORD:password}
+  address: localhost:11111
+  filter-regex: trade\.order.*
+
+logging:
+  level:
+    root: info
+    com.flash.framework: debug
